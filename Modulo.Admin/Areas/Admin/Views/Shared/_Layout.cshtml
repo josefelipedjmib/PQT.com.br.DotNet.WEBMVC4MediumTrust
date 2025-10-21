@@ -1,0 +1,83 @@
+﻿@using Essenciais.MVC.Extensions
+@using Essenciais.MVC
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title José Felipe - DJ Mib - Paquetá</title>
+    @Styles.Render("~/bundles/css")
+    @Styles.Render("~/Content/css/Admin.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="admin" class="container-fluid">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Site</a></li>
+                @{
+                    var uri = new Uri(Request.Url.ToString());
+                    var segmentos = uri.GetSegmentsTrated();
+                    for (int i = 1; i < segmentos.Length - 1; i++)
+                    {
+                        <li class="breadcrumb-item" aria-current="page"><a href="@(uri.GetBaseURL() + uri.GetURLAteSegmento(i))">@segmentos[i].RemoveFinalSlash()</a></li>
+                    }
+                    if (segmentos.Length > 1)
+                    {
+                        <li class="breadcrumb-item active" aria-current="page">@segmentos[segmentos.Length - 1]</li>
+                    }
+                }
+            </ol>
+            @if (Session.IsLoginValid())
+            {
+                <a href="@URLsPadrao.Sair" class="btn btn-close" title="Sair"></a>
+            }
+        </nav>
+        <main>
+
+            <div id="mensagemSucesso" class="alert alert-success d-none" role="alert">
+                Sucesso!
+            </div>
+            <div id="mensagemErro" class="alert alert-danger d-none" role="alert">
+                Erro!
+            </div>
+            <div id="mensagemAviso" class="alert alert-waning d-none" role="alert">
+                Aviso!
+            </div>
+            <div id="mensagemInfo" class="alert alert-info d-none" role="alert">
+                Informação!
+            </div>
+
+            @RenderBody()
+        </main>
+        <footer>
+            <p><a href="https://www.pqt.com.br/">&copy; 2003 - @DateTime.Now.Year - PQT - Profissionais Qualificados em Tecnologia</a></p>
+        </footer>
+    </div>
+
+    <!-- Modal de confirmação -->
+    <div class="modal fade" id="modalConfirmacao" tabindex="-1" aria-labelledby="modalConfirmacaoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConfirmacaoLabel">Confirmar?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="textoConfirmacao">Deseja confirmar?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btnConfirmacaoNao" data-bs-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-primary" id="btnConfirmacaoSim">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/site.min.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

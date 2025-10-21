@@ -1,0 +1,62 @@
+﻿@model Essenciais.MVC.Models.Usuario
+@using Essenciais.MVC
+@{
+    ViewBag.Title = "Resetar e-mail alterado";
+}
+<div class="row login-panel">
+    <div class="col-md-7"></div>
+    <div class="col-md-5">
+        <h1 class="text-center">@ViewBag.Title</h1>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            @Html.AntiForgeryToken()
+            if (ViewBag.Erro == true)
+            {
+                <div class="mb-3">
+                    <h5 class="alert alert-danger">Erro ao realizar a redefinicição de e-mail, verifique as informações preenchidas.</h5>
+                    @if (!Model.Aceito)
+                    {
+                        <h6 class="alert alert-danger">Você precisa aceitar os temos, caso contrário não poderá se cadastrar.</h6>
+                    }
+                    @if (!string.IsNullOrEmpty(ViewBag.Mensagem as string))
+                    {
+
+                        <h6 class="alert alert-warning">@Html.Raw(ViewBag.Mensagem)</h6>
+                    }
+                </div>
+            }
+            <div class="mb-3">
+                @Html.LabelFor(model => model.EMail, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.EMail, new { @class = "form-control", type = "email", aria_description = "emailinfo" })
+                @Html.ValidationMessageFor(model => model.EMail)
+                <div id="emailinfo" class="form-text">
+                    Email que será resetado em seu cadastro.
+                </div>
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.NovaSenha, new { @class = "form-label" })
+                @Html.PasswordFor(model => model.NovaSenha, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NovaSenha)
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.ConfirmaSenha, new { @class = "form-label" })
+                @Html.PasswordFor(model => model.ConfirmaSenha, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfirmaSenha)
+            </div>
+            <div class="mb-3 form-check form-switch">
+                @Html.CheckBoxFor(model => model.Aceito, new { @class = "form-check-input", aria_description = "aceitoinfo" })
+                @Html.LabelFor(model => model.Aceito, new { @class = "form-check-label" })
+                @Html.ValidationMessageFor(model => model.Aceito)
+                @Html.HiddenFor(model => model.ActivationKey);
+                <div id="aceitoinfo" class="form-text">
+                    Ao aceitar, informa que já está ciente, leu nossos termos de compromissos e aceita-o por completo.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Ativar</button> <a href="@URLsPadrao.Login" class="btn btn-secondary text-white">Cancelar</a>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

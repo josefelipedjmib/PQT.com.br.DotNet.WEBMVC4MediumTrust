@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pqt>
+  <conteudo>
+		<![CDATA[
+		<h1>Conteúdo padrão do XML</h1>
+		<p>Agora podemos ter conteúdos carregados do XML</p>
+		]]>
+  </conteudo>
+</pqt>

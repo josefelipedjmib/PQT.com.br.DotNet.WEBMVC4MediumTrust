@@ -1,0 +1,10 @@
+.vs/
+.cr/
+**/bin/
+**/obj/
+**/packages/
+**/LogErro/*.txt*
+**/Web.MVC/Areas/
+Web.MVC/Web.config
+**/*.csproj.user
+**/*.pubxml.user

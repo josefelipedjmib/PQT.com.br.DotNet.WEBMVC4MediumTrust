@@ -1,0 +1,54 @@
+@model Domain.Models.Paginado
+@{ 
+
+    var ordena = string.Join(",", Model.OrdenacaoAtual.Select(o => o.Campo + ":" + o.Direcao));
+    ordena = string.IsNullOrEmpty(ordena) ? "" : "&ordena=" + ordena;
+}
+
+<div class="row">
+    <div class="col">
+        <nav aria-label="Navegação entre os registros">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.PaginasNumero < 2 ? "disabled" : "")">
+                    <a class="page-link" href="?pagina=1@(ordena)" aria-label="Primeira página" title="Primeira página">
+                        <span aria-hidden="true">Primeira</span>
+                    </a>
+                </li>
+                <li class="page-item @(Model.PaginasNumero < 2 ? "disabled" : "")">
+                    <a class="page-link" href="?pagina=@(Model.PaginasNumero - 1)@ordena" aria-label="Anterior" title="Anterior">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                @{
+                    var paginasAExibir = 5;
+                    int inicioPagina = Math.Max(1, Model.PaginasNumero - (int)Math.Floor((double)paginasAExibir / 2));
+                    int fimPagina = Math.Min(Model.TotalPaginas, inicioPagina + paginasAExibir - 1);
+                    if (fimPagina - inicioPagina + 1 < paginasAExibir)
+                    {
+                        inicioPagina = Math.Max(1, fimPagina - paginasAExibir + 1);
+                    }
+                }
+
+                <!-- Números das páginas -->
+                @for (int i = inicioPagina; i <= fimPagina; i++)
+                {
+                    <li class="page-item @(i == Model.PaginasNumero ? "active" : "")">
+                        <a class="page-link" href="@(i == Model.PaginasNumero ? "#" : "?pagina=" + i + ordena)">@i</a>
+                    </li>
+                }
+                <li class="page-item @(Model.PaginasNumero >= Model.TotalPaginas ? "disabled" : "")">
+                    <a class="page-link" href="?pagina=@(Model.PaginasNumero + 1)@ordena" aria-label="Próximo" title="Próximo">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item @(Model.PaginasNumero >= Model.TotalPaginas ? "disabled" : "")">
+                    <a class="page-link" href="?pagina=@(Model.TotalPaginas)@ordena" aria-label="Última página" title="Última página">
+                        <span aria-hidden="true">Última</span>
+                    </a>
+                </li>
+            </ul>
+            <p class="text-center">Total de registros: @Model.TotalItens</p>
+        </nav>
+    </div>
+</div>

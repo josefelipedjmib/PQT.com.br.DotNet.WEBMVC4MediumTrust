@@ -1,0 +1,35 @@
+@model string[]
+@{
+    ViewBag.Title = "Restaurar - " + Model[0];
+}
+<div class="row">
+    <h1>Deseja restaurar a página: <em>@Model[0]</em>?</h1>
+    <p>Esta ação irá restaurar o arquivo da página da lixeira, e caso já exista um arquivo com mesmo nome, o mesmo será substituído. O histórico também será restaurado sem substituir os demais existentes.</p>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+        {
+            <div class="mb-3">
+                <h5 class="alert alert-warning">@ViewBag.Mensagem</h5>
+            </div>
+        }
+        <div class="mb-3">
+            <label for="htmlEditor" class="form-label">Conteúdo da página:</label>
+            <hr />
+            <br />
+            @Html.Raw(Model[1])
+            <br />
+            <hr />
+            <input type="hidden" value="@Model[0]" name="pagina" id="pagina" />
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Restaurar</button>
+            <a href="/admin/pagina/@(Request.Url.Query)" class="btn btn-secondary">Cancelar</a>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

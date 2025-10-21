@@ -1,0 +1,51 @@
+@model string[]
+@{
+    ViewBag.Title = "Novo - " + Model[0];
+}
+<div class="row">
+    <h1>Criação de página</em></h1>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+        {
+            <div class="mb-3">
+                <h5 class="alert alert-warning">@ViewBag.Mensagem</h5>
+            </div>
+        }
+        <div class="mb-3">
+            <label for="pagina" class="form-label">Nome da página:</label>
+            <input type="text" id="pagina" name="pagina" class="form-control" area-description="paginainfo" />
+            <div id="paginainfo" class="form-text">
+                O nome da página irá refletir como será acessada.<br />
+                Por exemplo:<br />
+                <strong>Nome</strong> - <em>URL</em><br />
+                <strong>paginaabc</strong> - <em>dominio/paginaabc</em><br />
+                <strong>pagina-abc</strong> - <em>dominio/pagina/abc</em><br />
+                <strong>pagina-a-b-c</strong> - <em>dominio/pagina/a/b/c</em><br />
+                <strong>principal</strong> - <em>dominio</em> (padrão)<br />
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="htmlEditor" class="form-label">Conteúdo da página:</label>
+            <textarea rows="10" cols="7" id="htmlEditor" name="htmlEditor" class="form-control" placeholder="Seu código HTML aqui."></textarea>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="/admin/pagina/" class="btn btn-secondary">Cancelar</a>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var CKEDITOR_BASEPATH = '//pqt.com.br/ckeditor4-4.22.1/';
+    </script>
+    <script type="text/javascript" src="//pqt.com.br/ckeditor4-4.22.1/ckeditor.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            CKEDITOR.replace("htmlEditor");
+        }
+    </script>
+}

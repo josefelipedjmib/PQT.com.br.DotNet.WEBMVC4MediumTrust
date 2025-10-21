@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Mail\Templates\add-user.html" />
+    <None Remove="Mail\Templates\EmailPadrao.html" />
+    <None Remove="Mail\Templates\reset-password.html" />
+    <None Remove="Mail\Templates\reseta-email.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Mail\Templates\reseta-email.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mail\Templates\reset-password.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mail\Templates\add-user.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mail\Templates\EmailPadrao.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\RepositoryFramework\RepositoryFramework.csproj" />
+  </ItemGroup>
+
+</Project>

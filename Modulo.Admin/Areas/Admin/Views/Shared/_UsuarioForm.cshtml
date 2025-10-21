@@ -1,0 +1,57 @@
+@model Essenciais.MVC.Models.Usuario
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="mb-3">
+            <h5 class="alert alert-warning">@Html.Raw(ViewBag.Mensagem)</h5>
+        </div>
+    }
+    <div class="mb-3">
+        @Html.LabelFor(model => model.NomeExibicao, new { @class = "form-label" })
+        @Html.TextBoxFor(model => model.NomeExibicao, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.NomeExibicao)
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Nome, new { @class = "form-label" })
+        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Nome)
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(model => model.SNome, new { @class = "form-label" })
+        @Html.TextBoxFor(model => model.SNome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SNome)
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(model => model.EMail, new { @class = "form-label" })
+        @Html.TextBoxFor(model => model.EMail, new { @class = "form-control", type = "email" })
+        @Html.ValidationMessageFor(model => model.EMail)
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Senha, new { @class = "form-label" })
+        @Html.TextBoxFor(model => model.Senha, new { @class = "form-control", type = "password" })
+        @Html.ValidationMessageFor(model => model.Senha)
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(model => model.ConfirmaSenha, new { @class = "form-label" })
+        @Html.TextBoxFor(model => model.ConfirmaSenha, new { @class = "form-control", type = "password" })
+        @Html.ValidationMessageFor(model => model.ConfirmaSenha)
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Activate, new { @class = "form-check-label" })
+        @Html.CheckBoxFor(model => model.Activate, new { @class = "form-check-input" })
+        @Html.ValidationMessageFor(model => model.Activate)
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Exibir, new { @class = "form-check-label" })
+        @Html.CheckBoxFor(model => model.Exibir, new { @class = "form-check-input" })
+        @Html.ValidationMessageFor(model => model.Exibir)
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="/admin/usuario/@(Request.Url.Query)" class="btn btn-secondary">Cancelar</a>
+    </div>
+}

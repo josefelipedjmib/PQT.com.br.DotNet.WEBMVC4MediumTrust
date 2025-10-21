@@ -1,0 +1,24 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+nav[aria-label="breadcrumb"] .btn-close {
+    position: absolute;
+    top: .1em;
+    right: .3em;
+}
+
+table thead th a {
+    display: block;
+}

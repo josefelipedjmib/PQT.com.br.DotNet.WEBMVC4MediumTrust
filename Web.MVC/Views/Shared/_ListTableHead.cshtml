@@ -1,0 +1,34 @@
+@model  Domain.Models.RetornoPaginado<List<Dictionary<string, object>>>
+@using Domain.Models
+<tr>
+    @foreach (var cabecalho in Model.Cabecalhos)
+    {
+        var nomeSortState = Model.OrdenacaoAtual.FirstOrDefault(o => o.Campo == cabecalho.NomePropriedade);
+        var nomeDirecao = nomeSortState != null ? nomeSortState.Direcao : "";
+        var proximaNomeDirecao = (nomeDirecao == "asc") ? "desc" : (nomeDirecao == "desc" ? null : "asc");
+
+        var novaOrdenacao = new List<OrdenacaoCampo>();
+        if (proximaNomeDirecao != null)
+        {
+            novaOrdenacao.Add(new OrdenacaoCampo { Campo = cabecalho.NomePropriedade, Direcao = proximaNomeDirecao });
+        }
+
+        // Manter outras ordenações se existirem
+        foreach (var o in Model.OrdenacaoAtual.Where(o => o.Campo != cabecalho.NomePropriedade))
+        {
+            novaOrdenacao.Add(o);
+        }
+
+        var novaSortOrder = string.Join(",", novaOrdenacao.Select(o => o.Campo + ":" + o.Direcao));
+        <th scope="col">
+            <a href="?ordena=@novaSortOrder&pagina=@Model.PaginasNumero">
+                @cabecalho.NomeExibicao
+                @if (nomeDirecao == "asc")
+                {<i class="">&uarr;</i> }
+                else if (nomeDirecao == "desc")
+                { <i class="">&darr;</i>}
+            </a>
+        </th>
+    }
+    <th scope="col">Ação</th>
+</tr>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Para obter mais informações de como configurar seu aplicativo ASP.NET, visite
+  https://go.microsoft.com/fwlink/?LinkId=301880
+  -->
+<configuration>
+  <connectionStrings>
+    <add name="conexaoMySQL"
+      connectionString="---Mudar-Aqui---string-encriptada--Usar-string.Encrypt()-ou-PainelAdmin---"/>
+  </connectionStrings>
+  <appSettings>
+    <add key="webpages:Version" value="2.0.0.0"/>
+    <add key="webpages:Enabled" value="false"/>
+    <add key="ClientValidationEnabled" value="true"/>
+    <add key="UnobtrusiveJavaScriptEnabled" value="true"/>
+    <add key="Sistema:Nome" value="PQT - Profissionais Qualificados em Tecnologia"/>
+    <add key="useACL" value="false"/>
+    <add key="Ativado:AdminCadastro" value="true"/>
+    <add key="Ativado:AdminAtivar" value="true"/>
+    <add key="Ativado:AdminResetar" value="true"/>
+    <add key="Ativado:AdminResetarEmail" value="true"/>
+    <add key="Paginacao:ItensPorPagina" value="10"/>
+    <add key="Logger:Arquivo" value="true"/>
+    <add key="Logger:BD" value="true"/>
+    <add key="Logger:Dir" value="~/LogErro\"/>
+    <add key="Logger:DataFormato" value="dddd, dd - MMMM - yyyy - HH:mm:ss"/>
+    <add key="Email:EnviarReal" value="true"/>
+    <add key="Email:EmUso" value="Email:SMTP"/>
+    <add key="Email:SMTP"
+      value="---Mudar-Aqui---string-encriptada--Usar-string.Encrypt()-ou-PainelAdmin---"/>
+    <add key="Email:SendGrid" value="---Mudar-Aqui---string-encriptada--Usar-string.Encrypt()-ou-PainelAdmin---"/>
+    <add key="Email:EmailsSecaoEspecifica" value=""/>
+    <add key="Email:EmailsDevs" value=""/>
+    <add key="Email:EmailsCC" value=""/>
+    <add key="Email:EmailsBCC" value=""/>
+  </appSettings>
+  <system.webServer>
+    <httpErrors errorMode="Custom" existingResponse="Replace">
+      <clear/>
+      <error statusCode="404" path="/Error/404" responseMode="ExecuteURL"/>
+      <error statusCode="500" path="/Error/500" responseMode="ExecuteURL"/>
+    </httpErrors>
+    <rewrite>
+      <rules>
+        <clear/>
+        <rule name="Redirect to https" stopProcessing="true">
+          <match url=".*"/>
+          <conditions>
+            <add input="{HTTPS}" pattern="off" ignoreCase="true"/>
+          </conditions>
+          <action type="Redirect" url="https://www.pqt.com.br" redirectType="Permanent" appendQueryString="false"/>
+        </rule>
+      </rules>
+    </rewrite>
+    <handlers>
+      <remove name="ExtensionlessUrlHandler-Integrated-4.0"/>
+      <remove name="OPTIONSVerbHandler"/>
+      <remove name="TRACEVerbHandler"/>
+      <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="*" type="System.Web.Handlers.TransferRequestHandler"
+        preCondition="integratedMode,runtimeVersionv4.0"/>
+    </handlers>
+  </system.webServer>
+  <system.web>
+    <customErrors mode="Off"/>
+    <compilation targetFramework="4.6.2" debug="true"/>
+    <httpRuntime targetFramework="4.6.2"/>
+  </system.web>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Antlr3.Runtime" publicKeyToken="eb42632606e9261f"/>
+        <bindingRedirect oldVersion="0.0.0.0-3.5.0.2" newVersion="3.5.0.2"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Web.Infrastructure" publicKeyToken="31bf3856ad364e35"/>
+        <bindingRedirect oldVersion="0.0.0.0-2.0.1.0" newVersion="1.0.0.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed"/>
+        <bindingRedirect oldVersion="0.0.0.0-13.0.0.0" newVersion="13.0.0.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Optimization" publicKeyToken="31bf3856ad364e35"/>
+        <bindingRedirect oldVersion="1.0.0.0-1.1.0.0" newVersion="1.1.0.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="WebGrease" publicKeyToken="31bf3856ad364e35"/>
+        <bindingRedirect oldVersion="0.0.0.0-1.6.5135.21930" newVersion="1.6.5135.21930"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35"/>
+        <bindingRedirect oldVersion="4.0.0.0-4.0.0.1" newVersion="4.0.0.1"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Extensions.Primitives" publicKeyToken="adb9793829ddae60" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-9.0.0.8" newVersion="9.0.0.8"/>
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+</configuration>
+<!--ProjectGuid: F4C6412D-49CC-4F02-A905-01B4F747E8D1-->

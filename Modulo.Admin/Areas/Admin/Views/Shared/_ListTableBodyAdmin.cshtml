@@ -1,0 +1,35 @@
+@model  Domain.Models.RetornoPaginado<List<Dictionary<string, object>>>
+@if (Model.Errors.Any())
+{
+    <tr>
+        <th scope="row" colspan="@(Model.Cabecalhos.Count + 1)" class="text-center">
+            @(string.Join("<br />", Model.Errors))
+        </th>
+    </tr>
+}
+else
+{
+    foreach (var entity in Model.Data)
+    {
+        <tr>
+            @foreach (var cabecalho in Model.Cabecalhos)
+            {
+                <td>@entity[cabecalho.NomeExibicao]</td>
+            }
+            <td>
+                <a href="@(Model.RootPath)detalhar/@entity["Id"]@(Request.Url.Query)" class="btn btn-info" role="button">Detalhar</a>
+                -
+                <a href="@(Model.RootPath)editar/@entity["Id"]@(Request.Url.Query)" class="btn btn-primary" role="button">Editar</a>
+                -
+                <a href="@(Model.RootPath)apagar/@entity["Id"]@(Request.Url.Query)" class="btn btn-warning">Apagar</a>
+                @if (Model.EhAdmin)
+                {
+                <span>
+                    -
+                    <a href="#" class="btn btn-info btn-resetar-usuario" data-id="@entity["Id"]" data-nome="@entity.First().Value">Resetar Usuário</a>
+                </span>
+                }
+            </td>
+        </tr>
+    }
+}

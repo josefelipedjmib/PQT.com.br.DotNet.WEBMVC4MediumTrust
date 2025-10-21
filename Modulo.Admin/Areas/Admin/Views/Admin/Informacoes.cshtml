@@ -1,0 +1,118 @@
+﻿@using System.Globalization
+@{
+    ViewBag.Title = "Informações do Servidor";
+}
+
+<h1>Informações do Servidor</h1>
+<h2>Diretório Físico:</h2>
+<p>
+    Raiz /: @Server.MapPath("/") <br />
+    Til ~: @Server.MapPath("~") <br />
+    Atual ./: @Server.MapPath("./") <br />
+    Atual .: @Server.MapPath(".") <br />
+    Custommizado ../: @Server.MapPath("./../") <br />
+    Custommizado Dados: @Server.MapPath("~/dados") <br />
+</p>
+<h2>IP Do Servidor:</h2>
+<p>
+    LOCAL_ADDR: @Request.ServerVariables["LOCAL_ADDR"] <br />
+    <hr />
+    ::Demais IPS::<br />
+    UserHostAddress: @Request.UserHostAddress <br />
+    HTTP_FORWARDED: @Request.ServerVariables["HTTP_FORWARDED"] <br />
+    HTTP_FORWARDED_FOR: @Request.ServerVariables["HTTP_FORWARDED_FOR"] <br />
+    HTTP_X_FORWARDED: @Request.ServerVariables["HTTP_X_FORWARDED"] <br />
+    HTTP_X_FORWARDED_FOR: @Request.ServerVariables["HTTP_X_FORWARDED_FOR"] <br />
+    HTTP_CLIENT_IP: @Request.ServerVariables["HTTP_CLIENT_IP"] <br />
+    HTTP_CF_CONNECTING_IP: @Request.ServerVariables["HTTP_CF_CONNECTING_IP"] <br />
+</p>
+<h2>Data Hora:</h2>
+<p>
+    @string.Join("de", DateTime.Now.ToString("dddd, dd , MMMM , yyyy - HH:mm:ss").Split(','))
+</p>
+<h2>Sobre o Sistema</h2>
+<h3>Versão</h3>
+<p>@Environment.OSVersion.VersionString</p>
+<h3>Idioma</h3>
+<p>@CultureInfo.InstalledUICulture.DisplayName</p>
+<h3>Números</h3>
+<p>Separador Decimal @CultureInfo.InstalledUICulture.NumberFormat.NumberDecimalSeparator</p>
+<p>Separador Milhar @CultureInfo.InstalledUICulture.NumberFormat.NumberGroupSeparator</p>
+@{
+    decimal amount = 12345.67m;
+    string currentCultureFormatted = amount.ToString("C");
+}
+<p>Moeda @currentCultureFormatted;</p>
+<h3>Versão DotNet</h3>
+<p>OS @Environment.OSVersion.ToString() - V @Environment.Version.ToString()</p>
+<h2>(Des)Criptografia do sistema</h2>
+<div class="mb-3">
+    <label for="textoorigem" class="form-label">Texto original</label>
+    <textarea class="form-control" id="textoorigem" rows="3" placeholder="Entre com o texto original"></textarea>
+</div>
+<div class="mb-3">
+    <button class="btn btn-primary" onclick="encriptarTexto();">Encriptar o texto</button>
+    <button class="btn btn-secondary" onclick="descriptarTexto();">Descriptar o texto</button>
+</div>
+<div class="mb-3">
+    <label for="textoresultado" class="form-label">Resultado</label>
+    <textarea class="form-control" id="textoresultado" rows="3"></textarea>
+</div>
+<h2>Gerador de senha criptografada de Usuário</h2>
+<div class="mb-3">
+    <label for="senhasaltorigem" class="form-label">Salt para senha</label>
+    <input type="text" class="form-control" id="senhasaltorigem" placeholder="Deixar em branco para gerar automaticamente" />
+    <label for="senhaorigem" class="form-label">Senha a gerar</label>
+    <input type="text" class="form-control" id="senhaorigem" placeholder="Entre com a senha a ser criptograda" />
+</div>
+<div class="mb-3">
+    <button class="btn btn-primary" onclick="gerarSenhaCriptografada();">Gerar senha criptografada</button>
+</div>
+<div class="mb-3">
+    <label for="senharesultado" class="form-label">Resultado</label>
+    <textarea class="form-control" id="senharesultado" rows="3"></textarea>
+</div>
+<script type="text/javascript">
+    function encriptarTexto() {
+        chamadaAjax("Criptografar", $("#textoorigem").val(), "#textoresultado");
+    }
+
+    function descriptarTexto() {
+        chamadaAjax("Descriptografar", $("#textoorigem").val(), "#textoresultado");
+    }
+
+    function gerarSenhaCriptografada(){
+        chamadaAjax("GerarSenha", {Usuario: $("#senhasaltorigem").val(), Senha: $("#senhaorigem").val()}, "#senharesultado");
+    }
+
+    function chamadaAjax(url, data, campoRetorno, type) {
+        if (!type)
+            type = "POST"
+        $.ajax({
+            url: "/api/utils/" + url,
+            type: type,
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (response) {
+                $(campoRetorno).html(JSON.stringify(response));
+            }
+        });
+    }
+</script>
+<h2>Server Variables</h2>
+@{
+        var serverVariables = new Dictionary<string, string>();
+
+        foreach (var key in Request.ServerVariables.AllKeys)
+        {
+            serverVariables.Add(key, Request.ServerVariables[key]);
+        }
+}
+
+    <dl>
+    @foreach (var item in serverVariables)
+    {
+        <dt>@item.Key</dt>
+        <dd>@item.Value</dd>
+    }
+    </dl>

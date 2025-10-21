@@ -1,0 +1,11 @@
+@model Essenciais.MVC.Models.Usuario
+
+<div class="mb-3">
+    Nome Exibição: <strong>@Model.NomeExibicao</strong><br />
+    Nome: <strong>@Model.Nome</strong><br />
+    Sobrenome: <strong>@Model.SNome</strong><br />
+    E-mail: <strong>@Model.EMail</strong><br />
+    Criado em: <strong>@(Model.CreatedAt.HasValue ? Model.CreatedAt.Value.ToString("yyyy-MM-dd HH:mm:ss") : "-")</strong><br />
+    Atualizado em: <strong>@(Model.UpdatedAt.HasValue ? Model.UpdatedAt.Value.ToString("yyyy-MM-dd HH:mm:ss") : "-")</strong><br />
+    Exibir no sitema?: <strong>@(Model.Exibir ? "Sim" : "Não")</strong>
+</div>

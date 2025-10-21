@@ -1,0 +1,25 @@
+@model string[]
+@{
+    ViewBag.Title = "Detalhar - " + Model[0];
+}
+<div class="row">
+    <h1>Detalhes da página: <em>@Model[0]</em></h1>
+    @Html.Partial("_PaginaInfos", Model)
+    <div class="mb-3">
+        @if (Model[0].ToLower().Contains(Model[2].ToLower()))
+        {
+            <a href="/admin/pagina/lixeira" class="btn btn-primary">Lixeira</a>
+            <a href="/admin/pagina/restaurar/@Model[0]@(Request.Url.Query)" class="btn btn-warning">Restaurar</a>
+            <a href="/admin/pagina/@(Request.Url.Query)" class="btn btn-secondary">Listar Páginas</a>
+        }
+        else
+        {
+            <a href="/admin/pagina/editar/@Model[0]@(Request.Url.Query)" class="btn btn-primary">Editar Página</a>
+            <a href="/admin/pagina/apagar/@Model[0]@(Request.Url.Query)" class="btn btn-warning">Apagar Página</a>
+            <a href="/admin/pagina/@(Request.Url.Query)" class="btn btn-secondary">Listar Páginas</a>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

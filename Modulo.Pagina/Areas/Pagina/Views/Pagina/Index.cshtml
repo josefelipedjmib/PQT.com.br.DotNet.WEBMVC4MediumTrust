@@ -1,0 +1,30 @@
+@model Domain.Models.RetornoPaginado<List<Dictionary<string, object>>>
+@{
+    ViewBag.Title = "Paginas do site";
+}
+<div class="row">
+    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="mb-3">
+            <h5 class="alert alert-info">@Html.Raw(ViewBag.Mensagem)</h5>
+        </div>
+    }
+    <h1>Paginas do Site</h1>
+    <div>
+        <a href="/admin/pagina/novo" class="btn btn-primary">Nova</a>
+        <a href="/admin/pagina/lixeira" class="btn btn-info"><i class="bi bi-0-circle"></i>Lixeira</a>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            @Html.Partial("_ListTableHead", Model)
+        </thead>
+        <tbody>
+            @Html.Partial("_ListTableBody", Model)
+        </tbody>
+    </table>
+</div>
+@Html.Partial("_Paginacao", Model.GetPaginado())
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

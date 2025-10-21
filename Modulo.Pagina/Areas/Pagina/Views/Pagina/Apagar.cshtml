@@ -1,0 +1,27 @@
+@model string[]
+@{
+    ViewBag.Title = "Apagar - " + Model[0];
+}
+<div class="row">
+    <h1>Deseja apagar a página: <em>@Model[0]</em>?</h1>
+    <p>Esta ação irá apagar o arquivo da página, e todos os arquivos de versionamento da mesma. Ficando na Lixeira por @Model[2] dias.</p>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+        {
+            <div class="mb-3">
+                <h5 class="alert alert-warning">@ViewBag.Mensagem</h5>
+            </div>
+        }
+        @Html.Partial("_PaginaInfos", Model)
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Apagar</button>
+            <a href="/admin/pagina/@(Request.Url.Query)" class="btn btn-secondary">Cancelar</a>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

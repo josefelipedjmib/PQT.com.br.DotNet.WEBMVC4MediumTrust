@@ -1,0 +1,12 @@
+@model Essenciais.MVC.Models.Usuario
+@{
+    ViewBag.Title = "Editar Usuário " + Model.NomeExibicao;
+}
+<div class="row">
+    <h1>Edição do usuário: <em>@Model.NomeExibicao</em></h1>
+
+    @Html.Partial("_UsuarioForm", Model)
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

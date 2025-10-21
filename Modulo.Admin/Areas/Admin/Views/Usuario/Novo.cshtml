@@ -1,0 +1,12 @@
+@model Essenciais.MVC.Models.Usuario
+@{
+    ViewBag.Title = "Novo Usuário";
+}
+<div class="row">
+    <h1>Criação de Usuário</em></h1>
+
+    @Html.Partial("_UsuarioForm", Model)
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,29 @@
+﻿@model Essenciais.MVC.Models.Usuario
+@using Essenciais.MVC
+@{
+    ViewBag.Title = "Painel Admin Page";
+}
+
+<h1>Painel Administrativo</h1>
+
+<div class="row">
+
+    <div class="card col-md-3">
+        <div class="card-body">
+            <h5 class="card-title">@Model.NomeExibicao</h5>
+            <p class="card-text">E-mail: @Model.EMail .</p>
+        </div>
+        <div class="card-footer">
+            <a href="/admin/usuario/editar/@Model.Id" class="btn btn-primary">Editar Conta</a>
+            <a href="/admin/usuario/apagar/@Model.Id" class="btn btn-warning">Excluir Conta</a>
+            <a href="@URLsPadrao.Sair" class="btn btn-danger">Sair</a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <h2>Recursos do sitema:</h2>
+        @foreach (var opcao in URLsPadrao.MenuAdministrativo())
+        {
+            <a href="@opcao.Value" class="btn btn-primary m-1">@opcao.Key</a>
+        }
+    </div>
+</div>

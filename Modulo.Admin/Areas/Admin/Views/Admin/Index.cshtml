@@ -1,0 +1,48 @@
+﻿@model  Essenciais.MVC.Models.UsuarioLogin
+@using Essenciais.MVC
+@{
+    ViewBag.Title = "Login";
+}
+<div class="row login-panel">
+    <div class="col-md-7"></div>
+    <div class="col-md-5">
+        <h1 class="text-center">@ViewBag.Title</h1>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            @Html.AntiForgeryToken()
+            if (ViewBag.Erro == true)
+            {
+                <div class="mb-3">
+                    <h5 class="alert alert-danger">Erro ao conectar no sistema. favor tentar novamente.</h5>
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.Mensagem as string))
+            {
+                var classMensagem = ViewBag.Mensagem.ToString().ToLower().Contains("erros:") ? "alert-warning" : "alert-success";
+                
+                <div class="mb-3">
+                    <h5 class="alert @classMensagem">@Html.Raw(ViewBag.Mensagem)</h5>
+                </div>
+            }
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Usuario, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Usuario, new { @class = "form-control", aria_description = "usuarioinfo" })
+                @Html.ValidationMessageFor(model => model.Usuario)
+                <div id="usuarioinfo" class="form-text">Nunca compartilhe seu dados de acesso.</div>
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Senha, new { @class = "form-label" })
+                @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Senha)
+            </div>
+            <div class="mb-3 text-center">
+                <a href="@URLsPadrao.Resetar">Esqueci a senha</a>
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
