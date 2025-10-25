@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text.RegularExpressions;
 using System.Xml;
 
@@ -13,27 +12,33 @@ namespace Auxiliar.Helper
     {
         public static string AppBaseDirectory = AppContext.BaseDirectory;
         public static int DiasAExpirar = 30;
-        public static string XMLConeudoDiretorioPadrao = "Content/ctd/";
+        public static string XMLConteudoDiretorioPadrao = "Content/ctd/";
         public static string XMLExtensao = ".xml";
+        public static string TemExtensaoPadrao = "\\.[a-z0-9]{2,}$";
         public static string XMLModeloPadrao = "00modelo";
         public static string XMLNoPadraoConteudo = "//conteudo";
         public static string XMLDeletedArquivosMarca = "-DELETED-";
         public static string XMLConteudoHistoricoPadrao = @"([0-9]{4}.?[0-9]{2}.?[0-9]{2}.?[0-9]{2}.?[0-9]{2}.?[0-9]{2}).xml$";
         public static string XMLConteudoDeletadoPadrao = @".xml" + XMLDeletedArquivosMarca + @"[0-9]{14}$";
 
+        public static bool TemExtensao(string arquivo)
+        {
+            return Regex.IsMatch(arquivo, TemExtensaoPadrao);
+        }
+
         public static string GetPathFileXMLPadrao(string arquivo)
         {
             if (arquivo.ToLower().Contains("_xml"))
             {
                 arquivo = arquivo.Replace("_xml", XMLExtensao);
-                return Path.Combine(AppBaseDirectory + XMLConeudoDiretorioPadrao + arquivo);
+                return Path.Combine(AppBaseDirectory + XMLConteudoDiretorioPadrao + arquivo);
             }
-            return Path.Combine(AppBaseDirectory + XMLConeudoDiretorioPadrao + arquivo + XMLExtensao);
+            return Path.Combine(AppBaseDirectory + XMLConteudoDiretorioPadrao + arquivo + XMLExtensao);
         }
 
         public static string GetPathXMLPadrao()
         {
-            return Path.Combine(AppBaseDirectory + XMLConeudoDiretorioPadrao);
+            return Path.Combine(AppBaseDirectory + XMLConteudoDiretorioPadrao);
         }
 
         public static string GetTextNodeXML(string arquivo, string nodeXML = "")
