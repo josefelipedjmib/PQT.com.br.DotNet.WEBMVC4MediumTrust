@@ -15,22 +15,24 @@ namespace Web.MVC.Controllers
         {
             var urlHelper = new URLHelper(Request.Url.ToString(), Request.UserHostAddress, _paginaPadrao);
             var paginaArquivo = urlHelper.GetPaginaArquivo(urlHelper.Pagina);
-            var arquivoXML = IOHelper.GetPathFileXMLPadrao(paginaArquivo);
-            var conteudo = IOHelper.GetTextNodeXML(arquivoXML);
-            if (!string.IsNullOrEmpty(conteudo))
-                return View("ConteudoXML", "", conteudo);
-
-            var usuario = "";
-            if (Session.IsLoginValid())
+            if(!IOHelper.TemExtensao(paginaArquivo))
             {
-                usuario = Session.GetLogin();
+                var arquivoXML = IOHelper.GetPathFileXMLPadrao(paginaArquivo);
+                var conteudo = IOHelper.GetTextNodeXML(arquivoXML);
+                if (!string.IsNullOrEmpty(conteudo))
+                    return View("ConteudoXML", "", conteudo);
+
+                var usuario = "";
+                if (Session.IsLoginValid())
+                {
+                    usuario = Session.GetLogin();
+                }
+                var path = Request.Url.PathAndQuery;
+
+                var configs = ConfigurationsManagerHelper.GetAllAppSettings(ConfigurationsManagerHelper.GetAppSettingsAsDictionary, null);
+                Infrastructure.LogSystem.Prepare(configs);
+                Infrastructure.LogSystem.Logar(usuario, ((int)HttpStatusCode.NotFound).ToString(), path, "página não encontrada", urlHelper.GetIPTratado(), false, false);
             }
-            var path = Request.Url.PathAndQuery;
-
-            var configs = ConfigurationsManagerHelper.GetAllAppSettings(ConfigurationsManagerHelper.GetAppSettingsAsDictionary, null);
-            Infrastructure.LogSystem.Prepare(configs);
-            Infrastructure.LogSystem.Logar(usuario, ((int)HttpStatusCode.NotFound).ToString(), path, "página não encontrada", urlHelper.GetIPTratado(), false, false);
-
             var status = new HttpStatusCodeResult(HttpStatusCode.NotFound, "404 Not Found");
             Response.Status = status.StatusDescription;
             Response.StatusCode = status.StatusCode;
