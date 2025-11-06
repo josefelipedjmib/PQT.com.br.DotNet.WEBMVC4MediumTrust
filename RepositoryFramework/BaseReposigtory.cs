@@ -43,7 +43,7 @@ namespace RepositoryFramework
                 var idProp = propriedades.FirstOrDefault(p => p.Name.Equals(idPropertyName, StringComparison.OrdinalIgnoreCase));
                 var idValue = idProp != null ? idProp.GetValue(entidade, null) : null;
 
-                var isInsert = idValue == null || string.IsNullOrEmpty(idValue.ToString());
+                var isInsert = idValue == null || int.Equals(idValue, 0) || string.IsNullOrEmpty(idValue.ToString());
                 var sql = new StringBuilder();
                 var parametros = new List<MySqlParameter>();
 
