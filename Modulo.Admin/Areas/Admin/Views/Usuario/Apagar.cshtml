@@ -1,9 +1,9 @@
 @model Essenciais.MVC.Models.Usuario
 @{
-    ViewBag.Title = "Apagar usu·rio " + Model.NomeExibicao;
+    ViewBag.Title = "Apagar usu√°rio " + Model.NomeExibicao;
 }
 <div class="row">
-    <h1>Deseja apagar o usu·rio: <em>@Model.NomeExibicao</em>?</h1>
+    <h1>Deseja apagar o usu√°rio: <em>@Model.NomeExibicao</em>?</h1>
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
@@ -18,7 +18,7 @@
         @Html.Partial("_UsuarioInfos", Model)
 
         <div class="mb-3">
-            @Html.HiddenFor(model => model.NomeExibicao)
+            @Html.HiddenFor(model => model.Id)
             <button type="submit" class="btn btn-primary">Apagar</button>
             <a href="/admin/usuario/@(Request.Url.Query)" class="btn btn-secondary">Cancelar</a>
         </div>

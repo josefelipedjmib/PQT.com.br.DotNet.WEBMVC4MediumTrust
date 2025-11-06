@@ -142,7 +142,9 @@
     <Content Include="Areas\Admin\Views\Admin\ResetarEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Admin\Views\Shared\_ListTableBodyAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ListTableBodyAdmin.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <!-- gerar o publicado com os arquivos corretos -->
     <Content Include="Areas\Admin\Views\Web.config">

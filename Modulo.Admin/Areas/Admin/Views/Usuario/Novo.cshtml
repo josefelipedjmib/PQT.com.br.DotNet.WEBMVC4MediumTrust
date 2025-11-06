@@ -1,9 +1,9 @@
 @model Essenciais.MVC.Models.Usuario
 @{
-    ViewBag.Title = "Novo Usuário";
+    ViewBag.Title = "Novo UsuÃ¡rio";
 }
 <div class="row">
-    <h1>Criação de Usuário</em></h1>
+    <h1>@ViewBag.Title</h1>
 
     @Html.Partial("_UsuarioForm", Model)
 </div>

@@ -8,13 +8,13 @@
     @Html.Partial("_UsuarioInfos", Model.Data)
 
     <div class="mb-3">
-        <a href="/admin/usuario/editar/@Model.Data.Id@(Request.Url.Query)" class="btn btn-primary">Editar Usuário</a>
+        <a href="@(Model.RootPath)editar/@Model.Data.Id@(Request.Url.Query)" class="btn btn-primary">Editar UsuÃ¡rio</a>
         -
-        <a href="/admin/usuario/apagar/@Model.Data.Id@(Request.Url.Query)" class="btn btn-warning">Apagar Usuário</a>
+        <a href="@(Model.RootPath)apagar/@Model.Data.Id@(Request.Url.Query)" class="btn btn-warning">Apagar UsuÃ¡rio</a>
         -
-        <a href="/admin/usuario/@(Request.Url.Query)" class="btn btn-secondary">Listar Usuários</a>
+        <a href="@(Model.RootPath)@(Request.Url.Query)" class="btn btn-secondary">Listar UsuÃ¡rios</a>
         -
-        <a href="#" class="btn btn-info btn-resetar-usuario" data-id="@Model.Data.Id" data-nome="@Model.Data.NomeExibicao">Resetar Usuário</a>
+        <a href="#" class="btn btn-info btn-resetar-usuario" data-id="@Model.Data.Id" data-nome="@Model.Data.NomeExibicao">Resetar UsuÃ¡rio</a>
     </div>
 </div>
 
