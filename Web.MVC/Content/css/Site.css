@@ -1,22 +1,52 @@
-﻿/* Set padding to keep content from hitting the edges */
-.body-content {
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+﻿body {
+    padding: 1em 1em 5em 1em;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+#admin{
+    position: relative;
+    min-height: calc(100vh - 6em);
+    height: auto;
 }
 
+.navbreadcrumb{
+    position: relative;
+}
 
-nav[aria-label="breadcrumb"] .btn-close {
-    position: absolute;
-    top: .1em;
-    right: .3em;
+    .navbreadcrumb .breadcrumb {
+        margin-right: 2em;
+    }
+    
+    .navbreadcrumb a.btn-close{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+main, .login-panel {
+    min-height: 80vh;
+}
+
+.login-panel .col-md-7 {
+    background-image: url(/Content/img/fundologin.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4em;
+    line-height: 4em;
+    text-align: center;
+    background-color: var(--bs-gray-500);
+    background-image: var(--bs-gradient);
+}
+
+a{
+    color: #000;
+    text-decoration: none;
 }
 
 table thead th a {
