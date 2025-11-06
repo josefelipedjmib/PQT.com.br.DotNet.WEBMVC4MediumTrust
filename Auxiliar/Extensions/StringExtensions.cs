@@ -1,4 +1,6 @@
 ﻿
+using Auxiliar.Helper;
+
 namespace Auxiliar.Extensions
 {
     public static class SringExtensions
@@ -14,5 +16,7 @@ namespace Auxiliar.Extensions
                 return input;
             return char.ToUpper(input[0]) + input.Substring(1);
         }
+
+        public static string RetirarCaracteresEspeciais(this string input) => TextoHelper.TirarCaracteresEspeciais(input);
     }
 }
