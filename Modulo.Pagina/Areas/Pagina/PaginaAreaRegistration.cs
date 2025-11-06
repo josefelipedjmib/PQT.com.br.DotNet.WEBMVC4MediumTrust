@@ -19,21 +19,9 @@ namespace Modulo.Pagina.Areas.Pagina
             var url = "admin/" + AreaName + "/{action}/{pagina}";
             if (!JaRegistrada(url, AreaName))
             {
-                // Rota padr„o como fallback
+                // Rota padr√£o como fallback
                 context.MapRoute(
                     AreaName + "AdminAction_default",
-                    url,
-                    new { controller = "Pagina", action = "Index", pagina = UrlParameter.Optional },
-                    GetNamespaces()
-                ).DataTokens["UseNamespaceFallback"] = false;
-            }
-
-            url = "admin/" + AreaName + "/{controller}/{action}/{pagina}";
-            if (!JaRegistrada(url, AreaName))
-            {
-                // Rota padr„o como fallback
-                context.MapRoute(
-                    AreaName + "Admin_default",
                     url,
                     new { controller = "Pagina", action = "Index", pagina = UrlParameter.Optional },
                     GetNamespaces()

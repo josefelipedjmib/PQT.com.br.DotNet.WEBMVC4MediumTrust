@@ -3,7 +3,7 @@
     ViewBag.Title = "Novo - " + Model[0];
 }
 <div class="row">
-    <h1>CriaÁ„o de p·gina</em></h1>
+    <h1>Cria√ß√£o de p√°gina</em></h1>
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
@@ -15,21 +15,21 @@
             </div>
         }
         <div class="mb-3">
-            <label for="pagina" class="form-label">Nome da p·gina:</label>
+            <label for="pagina" class="form-label">Nome da p√°gina:</label>
             <input type="text" id="pagina" name="pagina" class="form-control" area-description="paginainfo" />
             <div id="paginainfo" class="form-text">
-                O nome da p·gina ir· refletir como ser· acessada.<br />
+                O nome da p√°gina ir√° refletir como ser√° acessada.<br />
                 Por exemplo:<br />
                 <strong>Nome</strong> - <em>URL</em><br />
                 <strong>paginaabc</strong> - <em>dominio/paginaabc</em><br />
                 <strong>pagina-abc</strong> - <em>dominio/pagina/abc</em><br />
                 <strong>pagina-a-b-c</strong> - <em>dominio/pagina/a/b/c</em><br />
-                <strong>principal</strong> - <em>dominio</em> (padr„o)<br />
+                <strong>principal</strong> - <em>dominio</em> (padr√£o)<br />
             </div>
         </div>
         <div class="mb-3">
-            <label for="htmlEditor" class="form-label">Conte˙do da p·gina:</label>
-            <textarea rows="10" cols="7" id="htmlEditor" name="htmlEditor" class="form-control" placeholder="Seu cÛdigo HTML aqui."></textarea>
+            <label for="htmlEditor" class="form-label">Conte√∫do da p√°gina:</label>
+            <textarea rows="10" cols="7" id="htmlEditor" name="htmlEditor" class="form-control" placeholder="Seu c√≥digo HTML aqui."></textarea>
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Salvar</button>
@@ -39,13 +39,13 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        var CKEDITOR_BASEPATH = '//pqt.com.br/ckeditor4-4.22.1/';
-    </script>
-    <script type="text/javascript" src="//pqt.com.br/ckeditor4-4.22.1/ckeditor.min.js" charset="utf-8"></script>
     <script type="text/javascript">
-        window.onload = function () {
+        var CKEDITOR_BASEPATH = '//cdn.pqt.com.br/ckeditor4-4.22.1/';
+    </script>
+    <script type="text/javascript" src="//cdn.pqt.com.br/ckeditor4-4.22.1/ckeditor.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
             CKEDITOR.replace("htmlEditor");
-        }
+        });
     </script>
 }

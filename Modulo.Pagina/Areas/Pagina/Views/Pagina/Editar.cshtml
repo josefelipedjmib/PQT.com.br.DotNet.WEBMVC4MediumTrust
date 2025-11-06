@@ -3,7 +3,7 @@
     ViewBag.Title = "Editar - " + Model[0];
 }
 <div class="row">
-    <h1>EdiÁ„o da p·gina: <em>@Model[0]</em></h1>
+    <h1>Edi√ß√£o da p√°gina: <em>@Model[0]</em></h1>
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
@@ -17,20 +17,20 @@
         if (ViewBag.Historicos != null)
         {
             <div class="mb-3">
-                <label for="historico">HistÛrico de versıes da p·gina:</label><br />
+                <label for="historico">Hist√≥rico de vers√µes da p√°gina:</label><br />
                 <select id="historico" class="form-select" aria-description="historicoinfo">
-                    <option value="">Escolha a vers„o</option>
+                    <option value="">Escolha a vers√£o</option>
                     @foreach (var historico in ViewBag.Historicos)
                     {
                         <option value="@historico" @(historico.Equals(Request.QueryString["historico"]) ? "selected" : "")>@historico</option>
                     }
                 </select>
-                <input type="button" class="btn btn-info" id="btnmudarversao" value="Carregar Vers„o" /><br />
-                <div id="historicoinfo" class="form-text">A vers„o que sÛ possui o nome do arquivo, È a vers„o atual. As demais, com data, s„o versıes de backup realizada no dia e hora mostrado.</div>
+                <input type="button" class="btn btn-info" id="btnmudarversao" value="Carregar Vers√£o" /><br />
+                <div id="historicoinfo" class="form-text">A vers√£o que s√≥ possui o nome do arquivo, √© a vers√£o atual. As demais, com data, s√£o vers√µes de backup realizada no dia e hora mostrado.</div>
             </div>
         }
         <div class="mb-3">
-            <label for="htmlEditor" class="form-label">Conte˙do da p·gina:</label>
+            <label for="htmlEditor" class="form-label">Conte√∫do da p√°gina:</label>
             <textarea rows="10" cols="7" id="htmlEditor" name="htmlEditor" class="form-control">@Model[1]</textarea>
             <input type="hidden" value="@Model[0]" name="pagina" id="pagina" />
         </div>
@@ -50,13 +50,13 @@
             }
         });
     </script>
-    <script>
-        var CKEDITOR_BASEPATH = '//pqt.com.br/ckeditor4-4.22.1/';
-    </script>
-    <script type="text/javascript" src="//pqt.com.br/ckeditor4-4.22.1/ckeditor.min.js" charset="utf-8"></script>
     <script type="text/javascript">
-        window.onload = function () {
+        var CKEDITOR_BASEPATH = '//cdn.pqt.com.br/ckeditor4-4.22.1/';
+    </script>
+    <script type="text/javascript" src="//cdn.pqt.com.br/ckeditor4-4.22.1/ckeditor.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
             CKEDITOR.replace("htmlEditor");
-        }
+        });
     </script>
 }
